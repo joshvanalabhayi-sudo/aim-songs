@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>నా కీర్తనామృతం | AIM Christian Assembly</title>
+  <style>
+    :root {
+      --bg: #0f1115;
+      --card: #181b22;
+      --card-hover: #20242e;
+      --text: #f3f4f6;
+      --muted: #9ca3af;
+      --accent: #f59e0b;
+      --border: #2a2f3a;
+      --danger: #ef4444;
+      --success: #10b981;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 16px;
+    }
+
+    .container {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    header {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .ministry {
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      margin-bottom: 6px;
+    }
+
+    .verse-wrap {
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .verse {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .creator-credit {
+      font-size: 0.8rem;
+      color: var(--muted);
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+    }
+
+    .creator-credit span {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .search-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    @media (min-width: 600px) {
+      .search-row {
+        grid-template-columns: 2.2fr 1fr;
+      }
+    }
+
+    .category-bar {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      margin-bottom: 14px;
+      scrollbar-width: thin;
+    }
+
+    .cat-chip {
+      background: var(--card);
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 7px 14px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .cat-chip:hover {
+      background: var(--card-hover);
+      color: var(--text);
+    }
+
+    .cat-chip.active {
+      background: var(--accent);
+      color: #111318;
+      border-color: var(--accent);
+    }
+
+    input, select, textarea, button {
+      background: var(--card);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 11px 13px;
+      font-size: 0.95rem;
+      outline: none;
+      font-family: inherit;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--accent);
+    }
+
+    button {
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    button:hover {
+      background: var(--card-hover);
+    }
+
+    .btn-accent {
+      background: var(--accent);
+      color: #111318;
+      border-color: var(--accent);
+    }
+
+    .btn-accent:hover {
+      opacity: 0.92;
+      background: var(--accent);
+    }
+
+    .btn-danger {
+      border-color: rgba(239, 68, 68, 0.5);
+      color: #fca5a5;
+    }
+
+    .btn-danger:hover {
+      background: rgba(239, 68, 68, 0.14);
+    }
+
+    .btn-success {
+      border-color: rgba(16, 185, 129, 0.5);
+      color: #6ee7b7;
+    }
+
+    .btn-sm {
+      padding: 7px 11px;
+      font-size: 0.85rem;
+      border-radius: 8px;
+    }
+
+    .song-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .song-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      transition: background 0.15s ease;
+    }
+
+    .song-card:hover {
+      background: var(--card-hover);
+    }
+
+    .song-info {
+      flex: 1;
+      cursor: pointer;
+    }
+
+    .song-title {
+      font-size: 1.08rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .song-num {
+      color: var(--accent);
+      margin-right: 6px;
+    }
+
+    .song-meta {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .card-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .fav-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 6px 10px;
+      font-size: 1.05rem;
+      line-height: 1;
+      border-radius: 8px;
+    }
+
+    .fav-btn.is-fav {
+      color: var(--accent);
+      border-color: rgba(245, 158, 11, 0.5);
+      background: rgba(245, 158, 11, 0.1);
+    }
+
+    .owner-song-actions {
+      display: none;
+    }
+
+    body.owner-unlocked .owner-song-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .reader, .admin-panel, .rules-panel {
+      display: none;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 16px;
+    }
+
+    .reader-top, .admin-top, .rules-top {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .rules-list {
+      padding-left: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    .font-controls, .admin-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .reader-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .reader-meta {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .lyrics {
+      white-space: pre-line;
+      font-size: 1.2rem;
+      line-height: 1.85;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    @media (min-width: 600px) {
+      .form-row-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+    }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 5px;
+    }
+
+    .status-msg {
+      margin-top: 10px;
+      font-size: 0.88rem;
+      color: var(--success);
+      min-height: 20px;
+    }
+
+    .empty {
+      text-align: center;
+      color: var(--muted);
+      padding: 28px 14px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .pin-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.78);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .pin-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+      width: 100%;
+      max-width: 320px;
+    }
+
+    .pin-title {
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .pin-input {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .pin-error {
+      color: #fca5a5;
+      font-size: 0.82rem;
+      min-height: 18px;
+      margin-bottom: 10px;
+    }
+
+    .pin-actions {
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="header-top">
+        <div>
+          <div class="ministry">AIM Christian Assembly • Exalt | Equip | Evangelise | Edify</div>
+          <h1 id="app-title">నా కీర్తనామృతం</h1>
+        </div>
+        <div class="header-actions">
+          <button id="rules-btn" type="button">Rules</button>
+          <button id="sync-btn" type="button">Sync</button>
+          <button id="admin-btn" type="button">Admin</button>
+        </div>
+      </div>
+      <div class="verse-wrap">
+        <div class="verse">"నా జీవితకాలమంతయు నేను యెహోవాను స్తుతించెదను..." — కీర్తనలు 146:2</div>
+        <div id="creator-credit" class="creator-credit" title="App Creator">Created by <span>N. Joshva</span></div>
+      </div>
+    </header>
+
+    <div id="rules-panel" class="rules-panel">
+      <div class="rules-top">
+        <strong>📌 App Rules & Guidelines</strong>
+        <button id="close-rules-btn" class="btn-sm" type="button">Close</button>
+      </div>
+      <ol class="rules-list">
+        <li>ఈ యాప్ <strong>AIM Christian Assembly</strong> సభ్యుల ఆరాధన మరియు వ్యక్తిగత ప్రార్థన కోసం మాత్రమే.</li>
+        <li>పాటలు మరియు లిరిక్స్ అనుమతి లేకుండా బయట కాపీ లేదా షేర్ చేయకూడదు.</li>
+        <li>కొత్త పాటల కోసం ఇంటర్నెట్ ఆన్ చేసి <strong>Sync</strong> బటన్ నొక్కండి; ఒకసారి సింక్ అయ్యాక ఆఫ్‌లైన్‌లో కూడా వాడవచ్చు.</li>
+        <li>నచ్చిన పాటలకు <strong>★</strong> నొక్కి Favorites లో సేవ్ చేసుకోవచ్చు.</li>
+        <li>పాటల మార్పులు మరియు చేర్పులు కేవలం Admin ద్వారా మాత్రమే జరుగుతాయి.</li>
+      </ol>
+    </div>
+
+    <div id="admin-panel" class="admin-panel">
+      <div class="admin-top">
+        <strong>Owner Song Manager</strong>
+        <div class="admin-actions">
+          <button id="copy-json-btn" class="btn-success" type="button">Copy JSON</button>
+          <button id="reset-data-btn" class="btn-danger" type="button">Reset Cache</button>
+          <button id="lock-admin-btn" type="button">Lock</button>
+        </div>
+      </div>
+
+      <form id="add-song-form" class="form-grid">
+        <div>
+          <label for="song-title">Song Title *</label>
+          <input id="song-title" type="text" placeholder="ఉదాహరణ: ఆరాధనకు యోగ్యుడా" required />
+        </div>
+        <div class="form-row-2">
+          <div>
+            <label for="song-category">Category</label>
+            <input id="song-category" type="text" value="Worship" placeholder="Worship / Praise / Prayer..." />
+          </div>
+          <div>
+            <label for="song-language">Language</label>
+            <input id="song-language" type="text" value="Telugu" placeholder="Telugu / English..." />
+          </div>
+        </div>
+        <div>
+          <label for="song-lyrics">Lyrics *</label>
+          <textarea id="song-lyrics" placeholder="పాట లిరిక్స్ ఇక్కడ పేస్ట్ చేయండి..." required></textarea>
+        </div>
+        <button class="btn-accent" type="submit">+ Add Song</button>
+      </form>
+      <div id="admin-status" class="status-msg"></div>
+    </div>
+
+    <div id="list-view">
+      <div class="search-row">
+        <input id="search-input" type="text" placeholder="పాట పేరు లేదా లిరిక్స్ సెర్చ్ చేయండి..." />
+        <select id="language-filter">
+          <option value="ALL">All Languages</option>
+        </select>
+      </div>
+      <div id="category-bar" class="category-bar"></div>
+      <div id="song-list" class="song-list"></div>
+    </div>
+
+    <div id="reader-view" class="reader">
+      <div class="reader-top">
+        <button id="back-btn" type="button">← Back</button>
+        <div class="font-controls">
+          <button id="font-dec" type="button">A-</button>
+          <button id="font-inc" type="button">A+</button>
+        </div>
+      </div>
+      <div id="reader-title" class="reader-title"></div>
+      <div id="reader-meta" class="reader-meta"></div>
+      <div id="reader-lyrics" class="lyrics"></div>
+    </div>
+  </div>
+
+  <div id="pin-modal" class="pin-modal">
+    <div class="pin-box">
+      <div class="pin-title">Enter Passkey</div>
+      <input id="owner-pin-input" class="pin-input" type="password" inputmode="numeric" placeholder="Passkey enter chey" />
+      <div id="pin-error" class="pin-error"></div>
+      <div class="pin-actions">
+        <button id="cancel-pin-btn" type="button">Cancel</button>
+        <button id="submit-pin-btn" class="btn-accent" type="button">Unlock</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const OWNER_PIN = "1462";
+    const STORAGE_KEY = "keerthanamrutham_songs_v1";
+    const FAV_STORAGE_KEY = "keerthanamrutham_favs_v1";
+    const SONGS_URL = "https://raw.githubusercontent.com/joshvanalabhayi-sudo/aim-songs/main/songs.json";
+
+    const baseSongs = [
+      {
+        title: "ఆరాధనకు యోగ్యుడా",
+        category: "Worship",
+        language: "Telugu",
+        lyrics: `ఆరాధనకు యోగ్యుడా నిత్యము స్తుతియించెదను
+నీ మేలులను మరువకనే ఎల్లప్పుడు స్తుతి పాడెదను (2)
+ఆరాధన ఆరాధన (2)
+నీ మేలులకై ఆరాధన – నీ దీవెనకై ఆరాధన (2)
+ఆరాధన ఆరాధన (2)
+
+దినమెల్ల నీ చేతులు చాపి
+నీ కౌగిలిలో కాపాడుచుంటివే (2)
+నీ ప్రేమ నీ జాలి నీ కరుణకై
+నా పూర్ణ హృదయముతో సన్నుతింతును (2)
+ఆరాధన ఆరాధన (2)
+నీ ప్రేమకై ఆరాధన – నీ జాలికై ఆరాధన (2)
+ఆరాధన ఆరాధన (2)
+
+ధనవంతులుగా చేయుటకు
+దారిద్య్రత ననుభవించినావు (2)
+హెచ్చించి ఘనపరచిన నిర్మలాత్ముడా
+పూర్ణాత్మ మనస్సుతో కొనియాడెదను (2)
+ఆరాధన ఆరాధన (2)
+నీ కృప కొరకై ఆరాధన – ఈ స్థితి కొరకై ఆరాధన (2)
+ఆరాధన ఆరాధన (2) ||ఆరాధనకు||`
+      }
+    ];
+
+    function loadCachedSongs() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed)) return parsed;
+        }
+      } catch (e) {}
+      return [...baseSongs];
+    }
+
+    function loadFavorites() {
+      try {
+        const saved = localStorage.getItem(FAV_STORAGE_KEY);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed)) return new Set(parsed);
+        }
+      } catch (e) {}
+      return new Set();
+    }
+
+    let songs = loadCachedSongs();
+    let favorites = loadFavorites();
+    let selectedCategory = "ALL";
+    let currentFontSize = 1.2;
+    let isOwnerUnlocked = false;
+    let isPinModalOpen = false;
+
+    const creatorCredit = document.getElementById("creator-credit");
+    const adminBtn = document.getElementById("admin-btn");
+    const rulesBtn = document.getElementById("rules-btn");
+    const rulesPanel = document.getElementById("rules-panel");
+    const closeRulesBtn = document.getElementById("close-rules-btn");
+    const listView = document.getElementById("list-view");
+    const readerView = document.getElementById("reader-view");
+    const adminPanel = document.getElementById("admin-panel");
+    const syncBtn = document.getElementById("sync-btn");
+    const lockAdminBtn = document.getElementById("lock-admin-btn");
+    const addSongForm = document.getElementById("add-song-form");
+    const copyJsonBtn = document.getElementById("copy-json-btn");
+    const resetDataBtn = document.getElementById("reset-data-btn");
+    const adminStatus = document.getElementById("admin-status");
+
+    const searchInput = document.getElementById("search-input");
+    const languageFilter = document.getElementById("language-filter");
+    const categoryBar = document.getElementById("category-bar");
+    const songListEl = document.getElementById("song-list");
+    const backBtn = document.getElementById("back-btn");
+    const fontDecBtn = document.getElementById("font-dec");
+    const fontIncBtn = document.getElementById("font-inc");
+    const readerTitle = document.getElementById("reader-title");
+    const readerMeta = document.getElementById("reader-meta");
+    const readerLyrics = document.getElementById("reader-lyrics");
+
+    const pinModal = document.getElementById("pin-modal");
+    const ownerPinInput = document.getElementById("owner-pin-input");
+    const pinError = document.getElementById("pin-error");
+    const cancelPinBtn = document.getElementById("cancel-pin-btn");
+    const submitPinBtn = document.getElementById("submit-pin-btn");
+
+    function saveCachedSongs() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(songs));
+    }
+
+    function saveFavorites() {
+      localStorage.setItem(FAV_STORAGE_KEY, JSON.stringify([...favorites]));
+    }
+
+    function toggleFavorite(title) {
+      if (favorites.has(title)) {
+        favorites.delete(title);
+      } else {
+        favorites.add(title);
+      }
+      saveFavorites();
+      renderSongs();
+    }
+
+    function setOwnerState(unlocked) {
+      isOwnerUnlocked = unlocked;
+      adminPanel.style.display = unlocked ? "block" : "none";
+      document.body.classList.toggle("owner-unlocked", unlocked);
+    }
+
+    function closePinModal() {
+      isPinModalOpen = false;
+      pinModal.style.display = "none";
+      ownerPinInput.value = "";
+      pinError.textContent = "";
+    }
+
+    function openPinModal() {
+      isPinModalOpen = true;
+      pinModal.style.display = "flex";
+      ownerPinInput.value = "";
+      pinError.textContent = "";
+      setTimeout(() => ownerPinInput.focus(), 60);
+    }
+
+    function triggerOwnerAccess() {
+      if (isPinModalOpen) return;
+      if (isOwnerUnlocked) {
+        setOwnerState(false);
+        return;
+      }
+      openPinModal();
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function populateFilters() {
+      const categories = [...new Set(songs.map(s => s.category).filter(Boolean))];
+      const languages = [...new Set(songs.map(s => s.language).filter(Boolean))];
+      const prevLang = languageFilter.value;
+
+      if (selectedCategory !== "ALL" && selectedCategory !== "FAV" && !categories.includes(selectedCategory)) {
+        selectedCategory = "ALL";
+      }
+
+      categoryBar.innerHTML = "";
+      const tabs = [
+        { key: "ALL", label: "All" },
+        { key: "FAV", label: "★ Favorites" },
+        ...categories.map(cat => ({ key: cat, label: cat }))
+      ];
+
+      tabs.forEach(tab => {
+        const chip = document.createElement("button");
+        chip.type = "button";
+        chip.className = "cat-chip" + (selectedCategory === tab.key ? " active" : "");
+        chip.textContent = tab.label;
+        chip.addEventListener("click", () => {
+          selectedCategory = tab.key;
+          populateFilters();
+          renderSongs();
+        });
+        categoryBar.appendChild(chip);
+      });
+
+      languageFilter.innerHTML = '<option value="ALL">All Languages</option>';
+      languages.forEach(lang => {
+        const opt = document.createElement("option");
+        opt.value = lang;
+        opt.textContent = lang;
+        languageFilter.appendChild(opt);
+      });
+      languageFilter.value = languages.includes(prevLang) ? prevLang : "ALL";
+    }
+
+    function deleteSongAtIndex(index) {
+      if (!isOwnerUnlocked) return;
+      const target = songs[index];
+      if (!target) return;
+
+      const ok = confirm(`"${target.title}" song ni delete cheyalani anukuntunnava?`);
+      if (!ok) return;
+
+      songs.splice(index, 1);
+      saveCachedSongs();
+      populateFilters();
+      renderSongs();
+      adminStatus.textContent = `"${target.title}" delete ayindi! Vere vallaki kooda update avvali ante Copy JSON nokki GitHub songs.json lo paste chey.`;
+    }
+
+    function renderSongs() {
+      const query = searchInput.value.trim().toLowerCase();
+      const selectedLang = languageFilter.value;
+
+      const itemsWithIndex = songs
+        .map((song, index) => ({ song, index }))
+        .filter(({ song }) => {
+          const matchesCat =
+            selectedCategory === "ALL" ||
+            (selectedCategory === "FAV" && favorites.has(song.title)) ||
+            song.category === selectedCategory;
+          const matchesLang = selectedLang === "ALL" || song.language === selectedLang;
+          const matchesQuery =
+            !que
