@@ -835,12 +835,10 @@
       readerLyrics.style.fontSize = `${currentFontSize}rem`;
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
-
-    creatorCredit.addEventListener("click", triggerOwnerAccess);
+    
       if (creatorCredit) {
   creatorCredit.addEventListener("click", () => {
     pinModal.style.display = "flex";
-    alert("Tap working!");
     isPinModalOpen = true;
     if (ownerPinInput) {
       ownerPinInput.value = "";
