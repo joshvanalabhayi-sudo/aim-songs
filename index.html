@@ -868,8 +868,7 @@
     syncBtn.addEventListener("click", () => {
       syncFromOnline(true);
     });
-    if (creatorCredit)
-    creatorCredit.addEventListener("click",triggerOwnerAccess);
+    if (creatorCredit)creatorCredit.addEventListener("click",triggerOwnerAccess);
     lockAdminBtn.addEventListener("click", () => {
       setOwnerState(false);
       adminStatus.textContent = "";
