@@ -429,7 +429,6 @@
         <div class="header-actions">
           <button id="rules-btn" type="button">Rules</button>
           <button id="sync-btn" type="button">Sync</button>
-          <button id="admin-btn" type="button">Admin</button>
         </div>
       </div>
       <div class="verse-wrap">
@@ -588,7 +587,6 @@
     let isPinModalOpen = false;
 
     const creatorCredit = document.getElementById("creator-credit");
-    const adminBtn = document.getElementById("admin-btn");
     const rulesBtn = document.getElementById("rules-btn");
     const rulesPanel = document.getElementById("rules-panel");
     const closeRulesBtn = document.getElementById("close-rules-btn");
@@ -742,4 +740,199 @@
             song.category === selectedCategory;
           const matchesLang = selectedLang === "ALL" || song.language === selectedLang;
           const matchesQuery =
-            !que
+            !query
+            song.title.toLowerCase().includes(query) ||
+            song.lyrics.toLowerCase().includes(query);
+          return matchesCat && matchesLang && matchesQuery;
+        });
+
+      if (itemsWithIndex.length === 0) {
+        songListEl.innerHTML = '<div class="empty">పాటలు ఏమీ దొరకలేదు.</div>';
+        return;
+      }
+
+      songListEl.innerHTML = "";
+      itemsWithIndex.forEach(({ song, index }) => {
+        const card = document.createElement("div");
+        card.className = "song-card";
+
+        const infoDiv = document.createElement("div");
+        infoDiv.className = "song-info";
+        infoDiv.innerHTML = `
+          <div class="song-title"><span class="song-num">${index + 1}.</span>${escapeHtml(song.title)}</div>
+          <div class="song-meta">${escapeHtml(song.category)} • ${escapeHtml(song.language)}</div>
+        `;
+        infoDiv.addEventListener("click", () => openSong(song, index + 1));
+
+        const actionsDiv = document.createElement("div");
+        actionsDiv.className = "card-actions";
+
+        const isFav = favorites.has(song.title);
+        const favBtn = document.createElement("button");
+        favBtn.type = "button";
+        favBtn.className = "fav-btn" + (isFav ? " is-fav" : "");
+        favBtn.textContent = isFav ? "★" : "☆";
+        favBtn.title = "Favorite";
+        favBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          toggleFavorite(song.title);
+        });
+
+        const ownerActionsDiv = document.createElement("div");
+        ownerActionsDiv.className = "owner-song-actions";
+
+        const delBtn = document.createElement("button");
+        delBtn.type = "button";
+        delBtn.className = "btn-danger btn-sm";
+        delBtn.textContent = "Delete";
+        delBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          deleteSongAtIndex(index);
+        });
+
+        ownerActionsDiv.appendChild(delBtn);
+        actionsDiv.appendChild(favBtn);
+        actionsDiv.appendChild(ownerActionsDiv);
+
+        card.appendChild(infoDiv);
+        card.appendChild(actionsDiv);
+        songListEl.appendChild(card);
+      });
+    }
+
+    async function syncFromOnline(showFeedback = false) {
+      if (!SONGS_URL) return;
+      try {
+        const sep = SONGS_URL.includes("?") ? "&" : "?";
+        const res = await fetch(`${SONGS_URL}${sep}t=${Date.now()}`, { cache: "no-store" });
+        if (!res.ok) throw new Error("Network response not ok");
+        const remoteSongs = await res.json();
+        if (Array.isArray(remoteSongs)) {
+          songs = remoteSongs;
+          saveCachedSongs();
+          populateFilters();
+          renderSongs();
+          if (showFeedback) {
+            alert("Songs sync ayyayi!");
+          }
+        }
+      } catch (err) {
+        if (showFeedback) {
+          alert("Online sync avvaledhu—internet check chesi malli try cheyandi.");
+        }
+      }
+    }
+
+    function openSong(song, num) {
+      listView.style.display = "none";
+      readerView.style.display = "block";
+      readerTitle.textContent = `${num}. ${song.title}`;
+      readerMeta.textContent = `${song.category} • ${song.language}`;
+      readerLyrics.textContent = song.lyrics;
+      readerLyrics.style.fontSize = `${currentFontSize}rem`;
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    creatorCredit.addEventListener("click", triggerOwnerAccess);
+    adminBtn.addEventListener("click", triggerOwnerAccess);
+
+    cancelPinBtn.addEventListener("click", closePinModal);
+    submitPinBtn.addEventListener("click", () => {
+      if (ownerPinInput.value.trim() === OWNER_PIN) {
+        closePinModal();
+        setOwnerState(true);
+        adminStatus.textContent = "Owner access unlocked. Songs pakkana Delete button kanipisthundi.";
+      } else {
+        pinError.textContent = "Wrong PIN! Try again.";
+        ownerPinInput.value = "";
+        ownerPinInput.focus();
+      }
+    });
+
+    ownerPinInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        submitPinBtn.click();
+      }
+    });
+
+    rulesBtn.addEventListener("click", () => {
+      const isOpen = rulesPanel.style.display === "block";
+      rulesPanel.style.display = isOpen ? "none" : "block";
+    });
+
+    closeRulesBtn.addEventListener("click", () => {
+      rulesPanel.style.display = "none";
+    });
+
+    syncBtn.addEventListener("click", () => {
+      syncFromOnline(true);
+    });
+    if (creatorCredit)
+    creatorCredit.addEventListener("click",triggerOwnerAccess);
+    lockAdminBtn.addEventListener("click", () => {
+      setOwnerState(false);
+      adminStatus.textContent = "";
+    });
+
+    addSongForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const title = document.getElementById("song-title").value.trim();
+      const category = document.getElementById("song-category").value.trim() || "Worship";
+      const language = document.getElementById("song-language").value.trim() || "Telugu";
+      const lyrics = document.getElementById("song-lyrics").value.trim();
+
+      if (!title || !lyrics) return;
+
+      songs.push({ title, category, language, lyrics });
+      saveCachedSongs();
+      populateFilters();
+      renderSongs();
+
+      document.getElementById("song-title").value = "";
+      document.getElementById("song-lyrics").value = "";
+      adminStatus.textContent = `"${title}" add ayindi! Vere vallaki kooda ravali ante Copy JSON nokki GitHub songs.json lo paste chey.`;
+    });
+
+    copyJsonBtn.addEventListener("click", async () => {
+      const jsonText = JSON.stringify(songs, null, 2);
+      try {
+        await navigator.clipboard.writeText(jsonText);
+        adminStatus.textContent = "JSON clipboard lo copy ayindi! GitHub songs.json lo paste chey.";
+      } catch (e) {
+        prompt("Ee JSON copy chesi GitHub songs.json lo paste chey:", jsonText);
+      }
+    });
+
+    resetDataBtn.addEventListener("click", () => {
+      localStorage.removeItem(STORAGE_KEY);
+      songs = [...baseSongs];
+      populateFilters();
+      renderSongs();
+      adminStatus.textContent = "Local cache clear ayindi.";
+    });
+
+    backBtn.addEventListener("click", () => {
+      readerView.style.display = "none";
+      listView.style.display = "block";
+    });
+
+    fontDecBtn.addEventListener("click", () => {
+      currentFontSize = Math.max(0.95, +(currentFontSize - 0.1).toFixed(2));
+      readerLyrics.style.fontSize = `${currentFontSize}rem`;
+    });
+
+    fontIncBtn.addEventListener("click", () => {
+      currentFontSize = Math.min(2.2, +(currentFontSize + 0.1).toFixed(2));
+      readerLyrics.style.fontSize = `${currentFontSize}rem`;
+    });
+
+    searchInput.addEventListener("input", renderSongs);
+    languageFilter.addEventListener("change", renderSongs);
+
+    populateFilters();
+    renderSongs();
+    syncFromOnline(false);
+  </script>
+</body>
+</html>
