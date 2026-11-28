@@ -373,7 +373,7 @@
     </div>
     <div class="verse-wrap">
       <div class="verse">"నా జీవితకాలమంతయు నేను యెహోవాను స్తుతించెదను..." – కీర్తనలు 146:2</div>
-      <div id="creator-credit" class="creator-credit" title="App Creator">Created by <span>N. Joshva</span></div>
+      <div id="adminbtn" class="creator-credit" title="App Creator">Created by <span>N. Joshva</span></div>
     </div>
   </header>
 
@@ -479,7 +479,7 @@
     let selectedCategory = "ALL";
     let currentFontSize = 1.15;
 
-    const creatorCredit = document.getElementById("creator-credit");
+    const adminBtn = document.getElementById("adminbtn");
     const pinModal = document.getElementById("pin-modal");
     const ownerPinInput = document.getElementById("owner-pin-input");
     const pinError = document.getElementById("pin-error");
@@ -637,7 +637,7 @@
       }
     }
 
-    creatorCredit.addEventListener("click", openPinModal);
+    adminBtn.addEventListener("click", openPinModal);
     cancelPinBtn.addEventListener("click", closePinModal);
 
     pinModal.addEventListener("click", (e) => {
@@ -700,3 +700,5 @@
 
     copyJsonBtn.addEventListener("click", async () => {
       const jsonText = JSON.stringify(songs, null, 2);
+      try {
+        awa
