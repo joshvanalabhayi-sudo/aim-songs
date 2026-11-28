@@ -4,20 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>నా కీర్తనామృతం | AIM Christian Assembly</title>
-
-  <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0f1115">
-   <style>
+  <link rel="manifest" href="./manifest.json" />
+  <meta name="theme-color" content="#121212" />
+  <style>
     :root {
-      --bg: #0f1115;
-      --card: #181b22;
-      --card-hover: #20242e;
-      --text: #f3f4f6;
-      --muted: #9ca3af;
+      --bg: #121212;
+      --surface: #1e1e1e;
+      --surface-2: #282828;
+      --text: #f3f3f3;
+      --muted: #b3b3b3;
       --accent: #f59e0b;
-      --border: #2a2f3a;
+      --accent-text: #111111;
+      --border: #333333;
       --danger: #ef4444;
-      --success: #10b981;
+      --success: #22c55e;
     }
 
     * {
@@ -28,226 +28,249 @@
 
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background-color: var(--bg);
+      background: var(--bg);
       color: var(--text);
       line-height: 1.6;
-      padding: 16px;
-    }
-
-    .container {
-      max-width: 780px;
-      margin: 0 auto;
+      min-height: 100vh;
     }
 
     header {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 18px;
-      margin-bottom: 14px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 16px;
+      position: sticky;
+      top: 0;
+      z-index: 20;
     }
 
     .header-top {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .ministry {
-      font-size: 0.78rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--accent);
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-
-    h1 {
-      font-size: 1.6rem;
-      margin-bottom: 6px;
-    }
-
-    .verse-wrap {
-      border-top: 1px solid var(--border);
-      padding-top: 10px;
-      margin-top: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
       gap: 12px;
       flex-wrap: wrap;
     }
 
-    .verse {
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-
-    .creator-credit {
+    .ministry {
       font-size: 0.8rem;
-      color: var(--muted);
-      cursor: pointer;
-      user-select: none;
-      -webkit-user-select: none;
-      touch-action: manipulation;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 4px;
     }
 
-    .creator-credit span {
-      color: var(--text);
-      font-weight: 600;
+    h1 {
+      font-size: 1.45rem;
+      font-weight: 700;
     }
 
     .header-actions {
       display: flex;
       gap: 8px;
+      align-items: center;
+    }
+
+    button, select, input, textarea {
+      font-family: inherit;
+      font-size: 0.95rem;
+    }
+
+    button {
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      color: var(--text);
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: 0.15s ease;
+    }
+
+    button:hover {
+      border-color: var(--accent);
+    }
+
+    .btn-accent {
+      background: var(--accent);
+      color: var(--accent-text);
+      border-color: var(--accent);
+      font-weight: 600;
+    }
+
+    .btn-danger {
+      background: rgba(239, 68, 68, 0.15);
+      color: #fca5a5;
+      border-color: rgba(239, 68, 68, 0.4);
+    }
+
+    .btn-success {
+      background: rgba(34, 197, 94, 0.15);
+      color: #86efac;
+      border-color: rgba(34, 197, 94, 0.4);
+    }
+
+    .btn-sm {
+      padding: 5px 10px;
+      font-size: 0.82rem;
+    }
+
+    .verse-wrap {
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
       flex-wrap: wrap;
+    }
+
+    .verse {
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    .creator-credit {
+      font-size: 0.85rem;
+      color: var(--accent);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .creator-credit span {
+      text-decoration: underline;
+      font-weight: 600;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    .rules-panel, .admin-panel {
+      display: none;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .rules-top, .admin-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .rules-list {
+      padding-left: 20px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .rules-list li {
+      margin-bottom: 6px;
+    }
+
+    .admin-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .form-row-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      background: var(--surface-2);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 12px;
+    }
+
+    textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    .status-msg {
+      margin-top: 10px;
+      font-size: 0.88rem;
+      color: var(--accent);
     }
 
     .search-row {
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: 1fr auto;
       gap: 10px;
       margin-bottom: 12px;
-    }
-
-    @media (min-width: 600px) {
-      .search-row {
-        grid-template-columns: 2.2fr 1fr;
-      }
     }
 
     .category-bar {
       display: flex;
       gap: 8px;
       overflow-x: auto;
-      padding-bottom: 6px;
+      padding-bottom: 8px;
       margin-bottom: 14px;
-      scrollbar-width: thin;
     }
 
-    .cat-chip {
-      background: var(--card);
-      color: var(--muted);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      padding: 7px 14px;
-      font-size: 0.88rem;
-      font-weight: 600;
+    .cat-btn {
       white-space: nowrap;
-      cursor: pointer;
-      transition: all 0.15s ease;
-    }
-
-    .cat-chip:hover {
-      background: var(--card-hover);
-      color: var(--text);
-    }
-
-    .cat-chip.active {
-      background: var(--accent);
-      color: #111318;
-      border-color: var(--accent);
-    }
-
-    input, select, textarea, button {
-      background: var(--card);
-      color: var(--text);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 11px 13px;
-      font-size: 0.95rem;
-      outline: none;
-      font-family: inherit;
-    }
-
-    textarea {
-      width: 100%;
-      min-height: 150px;
-      resize: vertical;
-    }
-
-    input:focus, select:focus, textarea:focus {
-      border-color: var(--accent);
-    }
-
-    button {
-      cursor: pointer;
-      font-weight: 600;
-    }
-
-    button:hover {
-      background: var(--card-hover);
-    }
-
-    .btn-accent {
-      background: var(--accent);
-      color: #111318;
-      border-color: var(--accent);
-    }
-
-    .btn-accent:hover {
-      opacity: 0.92;
-      background: var(--accent);
-    }
-
-    .btn-danger {
-      border-color: rgba(239, 68, 68, 0.5);
-      color: #fca5a5;
-    }
-
-    .btn-danger:hover {
-      background: rgba(239, 68, 68, 0.14);
-    }
-
-    .btn-success {
-      border-color: rgba(16, 185, 129, 0.5);
-      color: #6ee7b7;
-    }
-
-    .btn-sm {
-      padding: 7px 11px;
       font-size: 0.85rem;
-      border-radius: 8px;
+      padding: 6px 12px;
+    }
+
+    .cat-btn.active {
+      background: var(--accent);
+      color: var(--accent-text);
+      border-color: var(--accent);
+      font-weight: 600;
     }
 
     .song-list {
-      display: flex;
-      flex-direction: column;
+      display: grid;
       gap: 10px;
     }
 
     .song-card {
-      background: var(--card);
+      background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 14px 16px;
+      border-radius: 10px;
+      padding: 14px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 12px;
-      transition: background 0.15s ease;
-    }
-
-    .song-card:hover {
-      background: var(--card-hover);
-    }
-
-    .song-info {
-      flex: 1;
       cursor: pointer;
     }
 
-    .song-title {
-      font-size: 1.08rem;
-      font-weight: 700;
-      margin-bottom: 4px;
+    .song-card:hover {
+      border-color: var(--accent);
     }
 
-    .song-num {
-      color: var(--accent);
-      margin-right: 6px;
+    .song-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 4px;
     }
 
     .song-meta {
@@ -255,75 +278,30 @@
       color: var(--muted);
     }
 
-    .card-actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .fav-btn {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--muted);
-      padding: 6px 10px;
-      font-size: 1.05rem;
-      line-height: 1;
-      border-radius: 8px;
-    }
-
-    .fav-btn.is-fav {
-      color: var(--accent);
-      border-color: rgba(245, 158, 11, 0.5);
-      background: rgba(245, 158, 11, 0.1);
-    }
-
-    .owner-song-actions {
+    .reader {
       display: none;
-    }
-
-    body.owner-unlocked .owner-song-actions {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .reader, .admin-panel, .rules-panel {
-      display: none;
-      background: var(--card);
+      background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 14px;
+      border-radius: 12px;
       padding: 18px;
-      margin-bottom: 16px;
     }
 
-    .reader-top, .admin-top, .rules-top {
+    .reader-top {
       display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
       justify-content: space-between;
       align-items: center;
+      gap: 10px;
       margin-bottom: 14px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .rules-list {
-      padding-left: 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      font-size: 0.95rem;
-      color: var(--text);
-    }
-
-    .font-controls, .admin-actions {
-      display: flex;
       flex-wrap: wrap;
+    }
+
+    .font-controls {
+      display: flex;
       gap: 8px;
     }
 
     .reader-title {
-      font-size: 1.35rem;
+      font-size: 1.4rem;
       font-weight: 700;
       margin-bottom: 4px;
     }
@@ -331,125 +309,84 @@
     .reader-meta {
       font-size: 0.85rem;
       color: var(--muted);
-      margin-bottom: 14px;
+      margin-bottom: 16px;
     }
 
     .lyrics {
       white-space: pre-line;
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       line-height: 1.85;
-    }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
-    }
-
-    @media (min-width: 600px) {
-      .form-row-2 {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-      }
-    }
-
-    label {
-      display: block;
-      font-size: 0.85rem;
-      color: var(--muted);
-      margin-bottom: 5px;
-    }
-
-    .status-msg {
-      margin-top: 10px;
-      font-size: 0.88rem;
-      color: var(--success);
-      min-height: 20px;
-    }
-
-    .empty {
-      text-align: center;
-      color: var(--muted);
-      padding: 28px 14px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
     }
 
     .pin-modal {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.78);
-      z-index: 999;
+      background: rgba(0, 0, 0, 0.75);
+      z-index: 100;
       align-items: center;
       justify-content: center;
       padding: 16px;
     }
 
     .pin-box {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 18px;
       width: 100%;
-      max-width: 320px;
+      max-width: 360px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
     }
 
     .pin-title {
+      font-size: 1.15rem;
       font-weight: 700;
-      margin-bottom: 10px;
-    }
-
-    .pin-input {
-      width: 100%;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
     .pin-error {
       color: #fca5a5;
-      font-size: 0.82rem;
-      min-height: 18px;
-      margin-bottom: 10px;
+      font-size: 0.85rem;
+      min-height: 20px;
+      margin-top: 6px;
     }
 
     .pin-actions {
       display: flex;
-      gap: 8px;
       justify-content: flex-end;
+      gap: 8px;
+      margin-top: 12px;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <div class="header-top">
-        <div>
-          <div class="ministry">AIM Christian Assembly • Exalt | Equip | Evangelise | Edify</div>
-          <h1 id="app-title">నా కీర్తనామృతం</h1>
-        </div>
-        <div class="header-actions">
-          <button id="rules-btn" type="button">Rules</button>
-          <button id="sync-btn" type="button">Sync</button>
-        </div>
+  <header>
+    <div class="header-top">
+      <div>
+        <div class="ministry">AIM Christian Assembly • Exalt | Equip | Evangelise | Edify</div>
+        <h1 id="app-title">నా కీర్తనామృతం</h1>
       </div>
-      <div class="verse-wrap">
-        <div class="verse">"నా జీవితకాలమంతయు నేను యెహోవాను స్తుతించెదను..." — కీర్తనలు 146:2</div>
-        <div id="creator-credit" class="creator-credit" title="App Creator">Created by <span>N. Joshva</span></div>
+      <div class="header-actions">
+        <button id="rules-btn" type="button">Rules</button>
+        <button id="sync-btn" type="button">Sync</button>
       </div>
-    </header>
+    </div>
+    <div class="verse-wrap">
+      <div class="verse">"నా జీవితకాలమంతయు నేను యెహోవాను స్తుతించెదను..." – కీర్తనలు 146:2</div>
+      <div id="creator-credit" class="creator-credit" title="App Creator">Created by <span>N. Joshva</span></div>
+    </div>
+  </header>
 
+  <div class="container">
     <div id="rules-panel" class="rules-panel">
       <div class="rules-top">
-        <strong>📌 App Rules & Guidelines</strong>
-        <button id="close-rules-btn" class="btn-sm" type="button">Close</button>
+        <strong>📜 App Rules & Guidelines</strong>
+        <button id="close-rules-btn" type="button" class="btn-sm">Close</button>
       </div>
       <ol class="rules-list">
         <li>ఈ యాప్ <strong>AIM Christian Assembly</strong> సభ్యుల ఆరాధన మరియు వ్యక్తిగత ప్రార్థన కోసం మాత్రమే.</li>
         <li>పాటలు మరియు లిరిక్స్ అనుమతి లేకుండా బయట కాపీ లేదా షేర్ చేయకూడదు.</li>
         <li>కొత్త పాటల కోసం ఇంటర్నెట్ ఆన్ చేసి <strong>Sync</strong> బటన్ నొక్కండి; ఒకసారి సింక్ అయ్యాక ఆఫ్‌లైన్‌లో కూడా వాడవచ్చు.</li>
-        <li>నచ్చిన పాటలకు <strong>★</strong> నొక్కి Favorites లో సేవ్ చేసుకోవచ్చు.</li>
         <li>పాటల మార్పులు మరియు చేర్పులు కేవలం Admin ద్వారా మాత్రమే జరుగుతాయి.</li>
       </ol>
     </div>
@@ -458,9 +395,9 @@
       <div class="admin-top">
         <strong>Owner Song Manager</strong>
         <div class="admin-actions">
-          <button id="copy-json-btn" class="btn-success" type="button">Copy JSON</button>
-          <button id="reset-data-btn" class="btn-danger" type="button">Reset Cache</button>
-          <button id="lock-admin-btn" type="button">Lock</button>
+          <button id="copy-json-btn" type="button" class="btn-success btn-sm">Copy JSON</button>
+          <button id="reset-data-btn" type="button" class="btn-danger btn-sm">Reset Cache</button>
+          <button id="lock-admin-btn" type="button" class="btn-sm">Lock</button>
         </div>
       </div>
 
@@ -472,11 +409,11 @@
         <div class="form-row-2">
           <div>
             <label for="song-category">Category</label>
-            <input id="song-category" type="text" value="Worship" placeholder="Worship / Praise / Prayer..." />
+            <input id="song-category" type="text" value="ఆరాధన" placeholder="ఆరాధన / Worship / Praise" />
           </div>
           <div>
             <label for="song-language">Language</label>
-            <input id="song-language" type="text" value="Telugu" placeholder="Telugu / English..." />
+            <input id="song-language" type="text" value="తెలుగు" placeholder="తెలుగు / English" />
           </div>
         </div>
         <div>
@@ -516,11 +453,11 @@
   <div id="pin-modal" class="pin-modal">
     <div class="pin-box">
       <div class="pin-title">Enter Passkey</div>
-      <input id="owner-pin-input" class="pin-input" type="password" inputmode="numeric" placeholder="Passkey enter chey" />
+      <input id="owner-pin-input" type="password" inputmode="numeric" placeholder="Passkey enter chey" />
       <div id="pin-error" class="pin-error"></div>
       <div class="pin-actions">
         <button id="cancel-pin-btn" type="button">Cancel</button>
-        <button id="submit-pin-btn" class="btn-accent" type="button">Unlock</button>
+        <button id="submit-pin-btn" type="button" class="btn-accent">Unlock</button>
       </div>
     </div>
   </div>
@@ -528,85 +465,42 @@
   <script>
     const OWNER_PIN = "1462";
     const STORAGE_KEY = "keerthanamrutham_songs_v1";
-    const FAV_STORAGE_KEY = "keerthanamrutham_favs_v1";
-    const SONGS_URL = "https://raw.githubusercontent.com/joshvanalabhayi-sudo/aim-songs/main/songs.json";
 
     const baseSongs = [
       {
-        title: "ఆరాధనకు యోగ్యుడా",
-        category: "Worship",
-        language: "Telugu",
-        lyrics: `ఆరాధనకు యోగ్యుడా నిత్యము స్తుతియించెదను
-నీ మేలులను మరువకనే ఎల్లప్పుడు స్తుతి పాడెదను (2)
-ఆరాధన ఆరాధన (2)
-నీ మేలులకై ఆరాధన – నీ దీవెనకై ఆరాధన (2)
-ఆరాధన ఆరాధన (2)
-
-దినమెల్ల నీ చేతులు చాపి
-నీ కౌగిలిలో కాపాడుచుంటివే (2)
-నీ ప్రేమ నీ జాలి నీ కరుణకై
-నా పూర్ణ హృదయముతో సన్నుతింతును (2)
-ఆరాధన ఆరాధన (2)
-నీ ప్రేమకై ఆరాధన – నీ జాలికై ఆరాధన (2)
-ఆరాధన ఆరాధన (2)
-
-ధనవంతులుగా చేయుటకు
-దారిద్య్రత ననుభవించినావు (2)
-హెచ్చించి ఘనపరచిన నిర్మలాత్ముడా
-పూర్ణాత్మ మనస్సుతో కొనియాడెదను (2)
-ఆరాధన ఆరాధన (2)
-నీ కృప కొరకై ఆరాధన – ఈ స్థితి కొరకై ఆరాధన (2)
-ఆరాధన ఆరాధన (2) ||ఆరాధనకు||)
+        title: "తండ్రి దేవా",
+        category: "ఆరాధన",
+        language: "తెలుగు",
+        lyrics: "తండ్రి దేవా... తండ్రి దేవా...\nనా సర్వం నీవయ్యా\nనీవుంటే నాకు చాలు (2)\nనా ప్రియుడా నా ప్రాణమా - నిన్నారాధించెదన్\nనా జీవమా నా స్నేహమా"
       }
     ];
 
-    function loadCachedSongs() {
-      try {
-        const saved = localStorage.getItem(STORAGE_KEY);
-        if (saved) {
-          const parsed = JSON.parse(saved);
-          if (Array.isArray(parsed)) return parsed;
-        }
-      } catch (e) {}
-      return [...baseSongs];
-    }
-
-    function loadFavorites() {
-      try {
-        const saved = localStorage.getItem(FAV_STORAGE_KEY);
-        if (saved) {
-          const parsed = JSON.parse(saved);
-          if (Array.isArray(parsed)) return new Set(parsed);
-        }
-      } catch (e) {}
-      return new Set();
-    }
-
-    let songs = loadCachedSongs();
-    let favorites = loadFavorites();
+    let songs = [];
     let selectedCategory = "ALL";
-    let currentFontSize = 1.2;
-    let isOwnerUnlocked = false;
-    let isPinModalOpen = false;
+    let currentFontSize = 1.15;
 
     const creatorCredit = document.getElementById("creator-credit");
-    const rulesBtn = document.getElementById("rules-btn");
-    const rulesPanel = document.getElementById("rules-panel");
-    const closeRulesBtn = document.getElementById("close-rules-btn");
-    const listView = document.getElementById("list-view");
-    const readerView = document.getElementById("reader-view");
+    const pinModal = document.getElementById("pin-modal");
+    const ownerPinInput = document.getElementById("owner-pin-input");
+    const pinError = document.getElementById("pin-error");
+    const cancelPinBtn = document.getElementById("cancel-pin-btn");
+    const submitPinBtn = document.getElementById("submit-pin-btn");
     const adminPanel = document.getElementById("admin-panel");
-    const syncBtn = document.getElementById("sync-btn");
     const lockAdminBtn = document.getElementById("lock-admin-btn");
+    const adminStatus = document.getElementById("admin-status");
     const addSongForm = document.getElementById("add-song-form");
     const copyJsonBtn = document.getElementById("copy-json-btn");
     const resetDataBtn = document.getElementById("reset-data-btn");
-    const adminStatus = document.getElementById("admin-status");
-
+    const rulesBtn = document.getElementById("rules-btn");
+    const rulesPanel = document.getElementById("rules-panel");
+    const closeRulesBtn = document.getElementById("close-rules-btn");
+    const syncBtn = document.getElementById("sync-btn");
     const searchInput = document.getElementById("search-input");
     const languageFilter = document.getElementById("language-filter");
     const categoryBar = document.getElementById("category-bar");
-    const songListEl = document.getElementById("song-list");
+    const songList = document.getElementById("song-list");
+    const listView = document.getElementById("list-view");
+    const readerView = document.getElementById("reader-view");
     const backBtn = document.getElementById("back-btn");
     const fontDecBtn = document.getElementById("font-dec");
     const fontIncBtn = document.getElementById("font-inc");
@@ -614,248 +508,150 @@
     const readerMeta = document.getElementById("reader-meta");
     const readerLyrics = document.getElementById("reader-lyrics");
 
-    const pinModal = document.getElementById("pin-modal");
-    const ownerPinInput = document.getElementById("owner-pin-input");
-    const pinError = document.getElementById("pin-error");
-    const cancelPinBtn = document.getElementById("cancel-pin-btn");
-    const submitPinBtn = document.getElementById("submit-pin-btn");
+    function loadSongs() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            return parsed;
+          }
+        }
+      } catch (e) {
+        console.error("Failed to load local songs:", e);
+      }
+      return [...baseSongs];
+    }
 
     function saveCachedSongs() {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(songs));
-    }
-
-    function saveFavorites() {
-      localStorage.setItem(FAV_STORAGE_KEY, JSON.stringify([...favorites]));
-    }
-
-    function toggleFavorite(title) {
-      if (favorites.has(title)) {
-        favorites.delete(title);
-      } else {
-        favorites.add(title);
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(songs));
+      } catch (e) {
+        console.error("Failed to save songs:", e);
       }
-      saveFavorites();
-      renderSongs();
     }
 
-    function setOwnerState(unlocked) {
-      isOwnerUnlocked = unlocked;
-      adminPanel.style.display = unlocked ? "block" : "none";
-      document.body.classList.toggle("owner-unlocked", unlocked);
-    }
-
-    function closePinModal() {
-      isPinModalOpen = false;
-      pinModal.style.display = "none";
-      ownerPinInput.value = "";
-      pinError.textContent = "";
+    function setOwnerState(isUnlocked) {
+      adminPanel.style.display = isUnlocked ? "block" : "none";
+      if (!isUnlocked) {
+        adminStatus.textContent = "";
+      }
     }
 
     function openPinModal() {
-      isPinModalOpen = true;
-      pinModal.style.display = "flex";
-      ownerPinInput.value = "";
       pinError.textContent = "";
-      setTimeout(() => ownerPinInput.focus(), 60);
+      ownerPinInput.value = "";
+      pinModal.style.display = "flex";
+      setTimeout(() => ownerPinInput.focus(), 50);
     }
 
-    function triggerOwnerAccess() {
-      if (isPinModalOpen) return;
-      if (isOwnerUnlocked) {
-        setOwnerState(false);
-        return;
-      }
-      openPinModal();
-    }
-
-    function escapeHtml(str) {
-      return String(str)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;");
+    function closePinModal() {
+      pinModal.style.display = "none";
+      pinError.textContent = "";
+      ownerPinInput.value = "";
     }
 
     function populateFilters() {
-      const categories = [...new Set(songs.map(s => s.category).filter(Boolean))];
+      const currentLang = languageFilter.value || "ALL";
       const languages = [...new Set(songs.map(s => s.language).filter(Boolean))];
-      const prevLang = languageFilter.value;
+      languageFilter.innerHTML = '<option value="ALL">All Languages</option>' +
+        languages.map(lang => `<option value="${lang}">${lang}</option>`).join("");
+      languageFilter.value = languages.includes(currentLang) ? currentLang : "ALL";
 
-      if (selectedCategory !== "ALL" && selectedCategory !== "FAV" && !categories.includes(selectedCategory)) {
-        selectedCategory = "ALL";
-      }
+      const categories = ["ALL", ...new Set(songs.map(s => s.category).filter(Boolean))];
+      categoryBar.innerHTML = categories.map(cat => {
+        const label = cat === "ALL" ? "All Songs" : cat;
+        const activeClass = selectedCategory === cat ? "active" : "";
+        return `<button type="button" class="cat-btn ${activeClass}" data-cat="${cat}">${label}</button>`;
+      }).join("");
 
-      categoryBar.innerHTML = "";
-      const tabs = [
-        { key: "ALL", label: "All" },
-        { key: "FAV", label: "★ Favorites" },
-        ...categories.map(cat => ({ key: cat, label: cat }))
-      ];
-
-      tabs.forEach(tab => {
-        const chip = document.createElement("button");
-        chip.type = "button";
-        chip.className = "cat-chip" + (selectedCategory === tab.key ? " active" : "");
-        chip.textContent = tab.label;
-        chip.addEventListener("click", () => {
-          selectedCategory = tab.key;
+      categoryBar.querySelectorAll(".cat-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          selectedCategory = btn.dataset.cat;
           populateFilters();
           renderSongs();
         });
-        categoryBar.appendChild(chip);
       });
-
-      languageFilter.innerHTML = '<option value="ALL">All Languages</option>';
-      languages.forEach(lang => {
-        const opt = document.createElement("option");
-        opt.value = lang;
-        opt.textContent = lang;
-        languageFilter.appendChild(opt);
-      });
-      languageFilter.value = languages.includes(prevLang) ? prevLang : "ALL";
-    }
-
-    function deleteSongAtIndex(index) {
-      if (!isOwnerUnlocked) return;
-      const target = songs[index];
-      if (!target) return;
-
-      const ok = confirm(`"${target.title}" song ni delete cheyalani anukuntunnava?`);
-      if (!ok) return;
-
-      songs.splice(index, 1);
-      saveCachedSongs();
-      populateFilters();
-      renderSongs();
-      adminStatus.textContent = `"${target.title}" delete ayindi! Vere vallaki kooda update avvali ante Copy JSON nokki GitHub songs.json lo paste chey.`;
     }
 
     function renderSongs() {
-      const query = searchInput.value.trim().toLowerCase();
-      const selectedLang = languageFilter.value;
+      const query = (searchInput.value || "").trim().toLowerCase();
+      const lang = languageFilter.value;
 
-      const itemsWithIndex = songs
-        .map((song, index) => ({ song, index }))
-        .filter(({ song }) => {
-          const matchesCat =
-            selectedCategory === "ALL" ||
-            (selectedCategory === "FAV" && favorites.has(song.title)) ||
-            song.category === selectedCategory;
-          const matchesLang = selectedLang === "ALL" || song.language === selectedLang;
-          const matchesQuery =
-            !query
-            song.title.toLowerCase().includes(query) ||
-            song.lyrics.toLowerCase().includes(query);
-          return matchesCat && matchesLang && matchesQuery;
-        });
+      const filtered = songs.filter(song => {
+        const matchesCat = selectedCategory === "ALL" || song.category === selectedCategory;
+        const matchesLang = lang === "ALL" || song.language === lang;
+        const matchesQuery = !query ||
+          (song.title || "").toLowerCase().includes(query) ||
+          (song.lyrics || "").toLowerCase().includes(query);
+        return matchesCat && matchesLang && matchesQuery;
+      });
 
-      if (itemsWithIndex.length === 0) {
-        songListEl.innerHTML = '<div class="empty">పాటలు ఏమీ దొరకలేదు.</div>';
+      if (filtered.length === 0) {
+        songList.innerHTML = '<div class="song-card"><div class="song-meta">పాటలు ఏమీ కనపడలేదు.</div></div>';
         return;
       }
 
-      songListEl.innerHTML = "";
-      itemsWithIndex.forEach(({ song, index }) => {
-        const card = document.createElement("div");
-        card.className = "song-card";
+      songList.innerHTML = filtered.map((song, idx) => `
+        <div class="song-card" data-index="${idx}">
+          <div>
+            <div class="song-title">${song.title}</div>
+            <div class="song-meta">${song.category || ""} • ${song.language || ""}</div>
+          </div>
+          <div class="song-meta">Open →</div>
+        </div>
+      `).join("");
 
-        const infoDiv = document.createElement("div");
-        infoDiv.className = "song-info";
-        infoDiv.innerHTML = `
-          <div class="song-title"><span class="song-num">${index + 1}.</span>${escapeHtml(song.title)}</div>
-          <div class="song-meta">${escapeHtml(song.category)} • ${escapeHtml(song.language)}</div>
-        `;
-        infoDiv.addEventListener("click", () => openSong(song, index + 1));
-
-        const actionsDiv = document.createElement("div");
-        actionsDiv.className = "card-actions";
-
-        const isFav = favorites.has(song.title);
-        const favBtn = document.createElement("button");
-        favBtn.type = "button";
-        favBtn.className = "fav-btn" + (isFav ? " is-fav" : "");
-        favBtn.textContent = isFav ? "★" : "☆";
-        favBtn.title = "Favorite";
-        favBtn.addEventListener("click", (e) => {
-          e.stopPropagation();
-          toggleFavorite(song.title);
-        });
-
-        const ownerActionsDiv = document.createElement("div");
-        ownerActionsDiv.className = "owner-song-actions";
-
-        const delBtn = document.createElement("button");
-        delBtn.type = "button";
-        delBtn.className = "btn-danger btn-sm";
-        delBtn.textContent = "Delete";
-        delBtn.addEventListener("click", (e) => {
-          e.stopPropagation();
-          deleteSongAtIndex(index);
-        });
-
-        ownerActionsDiv.appendChild(delBtn);
-        actionsDiv.appendChild(favBtn);
-        actionsDiv.appendChild(ownerActionsDiv);
-
-        card.appendChild(infoDiv);
-        card.appendChild(actionsDiv);
-        songListEl.appendChild(card);
+      songList.querySelectorAll(".song-card").forEach((card, idx) => {
+        card.addEventListener("click", () => openSongReader(filtered[idx]));
       });
     }
 
+    function openSongReader(song) {
+      readerTitle.textContent = song.title;
+      readerMeta.textContent = `${song.category || ""} • ${song.language || ""}`;
+      readerLyrics.textContent = song.lyrics || "";
+      listView.style.display = "none";
+      readerView.style.display = "block";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
     async function syncFromOnline(showFeedback = false) {
-      if (!SONGS_URL) return;
       try {
-        const sep = SONGS_URL.includes("?") ? "&" : "?";
-        const res = await fetch(`${SONGS_URL}${sep}t=${Date.now()}`, { cache: "no-store" });
-        if (!res.ok) throw new Error("Network response not ok");
-        const remoteSongs = await res.json();
-        if (Array.isArray(remoteSongs)) {
-          songs = remoteSongs;
+        const res = await fetch(`./songs.json?t=${Date.now()}`, { cache: "no-store" });
+        if (!res.ok) throw new Error("Network response was not ok");
+        const onlineSongs = await res.json();
+        if (Array.isArray(onlineSongs) && onlineSongs.length > 0) {
+          songs = onlineSongs;
           saveCachedSongs();
           populateFilters();
           renderSongs();
           if (showFeedback) {
-            alert("Songs sync ayyayi!");
+            adminStatus.textContent = "Online songs sync ayyayi!";
           }
         }
-      } catch (err) {
+      } catch (e) {
         if (showFeedback) {
-          alert("Online sync avvaledhu—internet check chesi malli try cheyandi.");
+          adminStatus.textContent = "Offline / sync issue — local songs chupisthunnam.";
         }
       }
     }
 
-    function openSong(song, num) {
-      listView.style.display = "none";
-      readerView.style.display = "block";
-      readerTitle.textContent = `${num}. ${song.title}`;
-      readerMeta.textContent = `${song.category} • ${song.language}`;
-      readerLyrics.textContent = song.lyrics;
-      readerLyrics.style.fontSize = `${currentFontSize}rem`;
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-    
-      if (creatorCredit) {
-  creatorCredit.addEventListener("click", () => {
-    pinModal.style.display = "flex";
-    isPinModalOpen = true;
-    if (ownerPinInput) {
-      ownerPinInput.value = "";
-      setTimeout(() => ownerPinInput.focus(), 60);
-    }
-  });
-      }
+    creatorCredit.addEventListener("click", openPinModal);
     cancelPinBtn.addEventListener("click", closePinModal);
+
+    pinModal.addEventListener("click", (e) => {
+      if (e.target === pinModal) {
+        closePinModal();
+      }
+    });
+
     submitPinBtn.addEventListener("click", () => {
       if (ownerPinInput.value.trim() === OWNER_PIN) {
         closePinModal();
         setOwnerState(true);
-        adminStatus.textContent = "Owner access unlocked. Songs pakkana Delete button kanipisthundi.";
       } else {
-        pinError.textContent = "Wrong PIN! Try again.";
-        ownerPinInput.value = "";
-        ownerPinInput.focus();
+        pinError.textContent = "Wrong passkey! Malli try chey.";
       }
     });
 
@@ -878,16 +674,16 @@
     syncBtn.addEventListener("click", () => {
       syncFromOnline(true);
     });
+
     lockAdminBtn.addEventListener("click", () => {
       setOwnerState(false);
-      adminStatus.textContent = "";
     });
 
     addSongForm.addEventListener("submit", (e) => {
       e.preventDefault();
       const title = document.getElementById("song-title").value.trim();
-      const category = document.getElementById("song-category").value.trim() || "Worship";
-      const language = document.getElementById("song-language").value.trim() || "Telugu";
+      const category = document.getElementById("song-category").value.trim() || "ఆరాధన";
+      const language = document.getElementById("song-language").value.trim() || "తెలుగు";
       const lyrics = document.getElementById("song-lyrics").value.trim();
 
       if (!title || !lyrics) return;
@@ -904,49 +700,3 @@
 
     copyJsonBtn.addEventListener("click", async () => {
       const jsonText = JSON.stringify(songs, null, 2);
-      try {
-        await navigator.clipboard.writeText(jsonText);
-        adminStatus.textContent = "JSON clipboard lo copy ayindi! GitHub songs.json lo paste chey.";
-      } catch (e) {
-        prompt("Ee JSON copy chesi GitHub songs.json lo paste chey:", jsonText);
-      }
-    });
-
-    resetDataBtn.addEventListener("click", () => {
-      localStorage.removeItem(STORAGE_KEY);
-      songs = [...baseSongs];
-      populateFilters();
-      renderSongs();
-      adminStatus.textContent = "Local cache clear ayindi.";
-    });
-
-    backBtn.addEventListener("click", () => {
-      readerView.style.display = "none";
-      listView.style.display = "block";
-    });
-
-    fontDecBtn.addEventListener("click", () => {
-      currentFontSize = Math.max(0.95, +(currentFontSize - 0.1).toFixed(2));
-      readerLyrics.style.fontSize = `${currentFontSize}rem`;
-    });
-
-    fontIncBtn.addEventListener("click", () => {
-      currentFontSize = Math.min(2.2, +(currentFontSize + 0.1).toFixed(2));
-      readerLyrics.style.fontSize = `${currentFontSize}rem`;
-    });
-
-    searchInput.addEventListener("input", renderSongs);
-    languageFilter.addEventListener("change", renderSongs);
-
-    populateFilters();
-    renderSongs();
-    syncFromOnline(false);
-  <script>
-  if ("serviceWorker" in navigator) {
-    window.addEventListener("load", () => {
-      navigator.serviceWorker.register("./sw.js");
-    });
-  }
- </script>
-</body>
-</html>
