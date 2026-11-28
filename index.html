@@ -837,7 +837,16 @@
     }
 
     creatorCredit.addEventListener("click", triggerOwnerAccess);
-
+      if (creatorCredit) {
+  creatorCredit.addEventListener("click", () => {
+    pinModal.style.display = "flex";
+    isPinModalOpen = true;
+    if (ownerPinInput) {
+      ownerPinInput.value = "";
+      setTimeout(() => ownerPinInput.focus(), 60);
+    }
+  });
+      }
     cancelPinBtn.addEventListener("click", closePinModal);
     submitPinBtn.addEventListener("click", () => {
       if (ownerPinInput.value.trim() === OWNER_PIN) {
