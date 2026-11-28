@@ -4,7 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>నా కీర్తనామృతం | AIM Christian Assembly</title>
-  <style>
+
+  <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0f1115">
+   <style>
     :root {
       --bg: #0f1115;
       --card: #181b22;
@@ -930,6 +933,12 @@
     populateFilters();
     renderSongs();
     syncFromOnline(false);
-  </script>
+  <script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("./sw.js");
+    });
+  }
+ </script>
 </body>
 </html>
