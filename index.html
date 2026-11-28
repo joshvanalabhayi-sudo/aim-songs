@@ -834,7 +834,6 @@
     }
 
     creatorCredit.addEventListener("click", triggerOwnerAccess);
-    adminBtn.addEventListener("click", triggerOwnerAccess);
 
     cancelPinBtn.addEventListener("click", closePinModal);
     submitPinBtn.addEventListener("click", () => {
@@ -868,7 +867,6 @@
     syncBtn.addEventListener("click", () => {
       syncFromOnline(true);
     });
-    if (creatorCredit)creatorCredit.addEventListener("click",triggerOwnerAccess);
     lockAdminBtn.addEventListener("click", () => {
       setOwnerState(false);
       adminStatus.textContent = "";
